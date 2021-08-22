@@ -89,4 +89,5 @@ Parte da pagina de gameOver */
  display: grid;
  grid-template: 1fr 1fr 1fr 1fr 1fr/ 1fr 1fr 1fr 1fr;
  gap:20px;
+ perspective: 1000px;
 }
