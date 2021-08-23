@@ -182,7 +182,7 @@ function resetTotal() {
     for(let card of cards){
         card.classList.remove('flip');
     }
-    //or
+    //or unflip 
     
     unflipCards();
     cards.forEach(card => card.addEventListener('click',flipCard));
