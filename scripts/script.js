@@ -67,11 +67,17 @@
 // }
 
 const cards = document.querySelectorAll('.card');
-
+// está virada?
 let hasFlippedCard = false;
+// após a segunda carta selecionada travar o tabuleiro até resolver
+let lockBoard = false;
+let matches = 0;
 let firstCard, secondCard;
 
 function flipCard() {
+    if(lockBoard) return;
+
+    if (this === firstCard) return;
     this.classList.add('flip');
 
     if(!hasFlippedCard){
@@ -81,7 +87,6 @@ function flipCard() {
     }
 
     secondCard = this;
-    hasFlippedCard = false;
 
     checkForMatch();
 }
@@ -96,20 +101,86 @@ function checkForMatch(){
     // }
 
     // unflipCards();
+   
+        
+
 }
 
 function disableCards(){
-
+    matches++;
     firstCard.removeEventListener('click', flipCard);
     secondCard.removeEventListener('click', flipCard);
+    resetBoard();
+
+    checkGameOver();
+    //teste
 }
 
 function unflipCards() {
-    setTimeout(()=> {
+    lockBoard = true;
+
+    setTimeout(()=> {   
         firstCard.classList.remove('flip');
         secondCard.classList.remove('flip');
-    },1500);
+
+        resetBoard();
+    },500);
+
+}
+
+function resetBoard() {
+    [hasFlippedCard, lockBoard] = [false, false];
+    [firstCard, secondCard] = [null, null];
+}
+//a função dentro do parenteses com um parenteses no final, executara a ação na hora
+(function shuffle() {
+    cards.forEach(card => {
+        let randomPos = Math.floor(Math.random() * 20);
+        card.style.order = randomPos;
+    });
+})();
+
+function checkGameOver(){
+if(matches === 10)
+{
+    let gameOverScreen = document.getElementById('gameOver');
+    setTimeout(()=> {   
+        gameOverScreen.style.display = 'flex';
+        resetTotal();
+      
+    },700);
+
+
+   
+}
+
 }
 
 
-cards.forEach(card => card.addEventListener('click',flipCard));
+
+function restart(){
+    let resetbtn = document.querySelector('#restart');
+
+    resetbtn.addEventListener('click', () =>{
+        let gameOverScreen = document.getElementById('gameOver');
+        gameOverScreen.style.display = 'none';
+        // for(let card of cards){
+        //     card[i].classList.remove('flip');
+        // }
+        
+
+        
+        
+    })
+}
+function resetTotal() {
+    [hasFlippedCard, lockBoard] = [false, false];
+    [firstCard, secondCard] = [null, null];
+
+    for(let card of cards){
+        card.classList.remove('flip');
+    }
+}
+    
+
+

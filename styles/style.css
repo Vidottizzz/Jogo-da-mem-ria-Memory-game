@@ -75,8 +75,8 @@ Parte da pagina de gameOver */
     /* top forçado no 0 para sobrepor os outros conteudos */
     top: 0;
 }
-
 #restart{
+    cursor: pointer;
     padding: 20px;
     font-size: 20px;
     background-color: yellow;
@@ -84,6 +84,8 @@ Parte da pagina de gameOver */
     border-radius: 10px;
     margin-top: 10px;
 }
+
+
 #gameBoard{
  max-width: 700px;
  display: grid;
@@ -91,3 +93,4 @@ Parte da pagina de gameOver */
  gap:20px;
  perspective: 1000px;
 }
+
