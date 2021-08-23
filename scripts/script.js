@@ -127,7 +127,8 @@ function unflipCards() {
     },500);
 
 }
-
+//FIXED
+cards.forEach(card => card.addEventListener('click',flipCard));
 function resetBoard() {
     [hasFlippedCard, lockBoard] = [false, false];
     [firstCard, secondCard] = [null, null];
@@ -182,5 +183,3 @@ function resetTotal() {
     }
 }
     
-
-
